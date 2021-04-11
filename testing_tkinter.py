@@ -27,15 +27,18 @@ root.config(background="white")
 label_file_explorer = Label(root, text = "Select report",width = 70, height = 4,fg = "blue")
 label_file_explorer.pack()
 
+
+
+# Browse files button
+button_explore = Button(root,text = "Browse Files",command = viewFiles)
+button_explore.pack()
+
 # Input Box
 e = Entry(root, width = 50)
 e.pack()
 e.insert(0, "Enter your start date: ")
 e.get() # Gets the value of the written thing
 
-# Browse files button
-button_explore = Button(root,text = "Browse Files",command = viewFiles)
-button_explore.pack()
 # Exit button
 button_exit = Button(root, text = "Exit", command = exit)
 button_exit.pack()
