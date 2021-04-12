@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import filedialog
 from sys import exit
+import sys
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -55,7 +56,6 @@ root.title('File Explorer')
 
 # Create a File Explorer label
 
-
 # Browse files button
 #button_explore = Button(root,text = "Browse Files",command = viewFiles)
 #button_explore.pack()
@@ -69,7 +69,7 @@ root.title('File Explorer')
 # Start Date
 start_date_label = Label(root, text="Start Date: ")
 start_date_label.pack()
-start_date_entry = Entry(root, bd =5)
+start_date_entry = Entry(root, bd =5,width = 50)
 start_date_entry.insert(0, "ex. 2021/01/21")
 start_date_entry.pack()
 start_date_entry.get()
@@ -79,7 +79,7 @@ start_date = start_date_entry.get()
 # Start Time
 start_time_label = Label(root, text="Start time: ")
 start_time_label.pack()
-start_time_entry = Entry(root, bd =5)
+start_time_entry = Entry(root, bd =5,width = 50)
 start_time_entry.insert(0, "ex. 09:00:00")
 start_time_entry.pack()
 start_time_entry.get()
@@ -88,7 +88,7 @@ start_time = start_time_entry.get()
 # End Date
 end_date_label = Label(root, text="End Date: ")
 end_date_label.pack()
-end_date_entry = Entry(root, bd =5)
+end_date_entry = Entry(root, bd =5,width = 50)
 end_date_entry.insert(0, "ex. 2021/01/21")
 end_date_entry.pack()
 end_date_entry.get()
@@ -97,7 +97,7 @@ end_date = end_date_entry.get()
 # End time
 end_time_label = Label(root, text="End time: ")
 end_time_label.pack()
-end_time_entry = Entry(root, bd =5)
+end_time_entry = Entry(root, bd =5,width = 50)
 end_time_entry.insert(0, "ex. 10:30:00")
 end_time_entry.pack()
 end_time_entry.get()
@@ -115,8 +115,13 @@ calculate_bttn = Button(root, text="Calculate", command=myClick)
 calculate_bttn.pack()
 
 
-    
+# Restart the program
+def restart_program():
+    python = sys.executable
+    os.execl(python, python, * sys.argv)
 
+restart_bttn = Button(root, text = "Restart", command = restart_program)
+restart_bttn.pack()
 
 # Exit button
 button_exit = Button(root, text = "Exit", command = exit)
