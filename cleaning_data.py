@@ -18,13 +18,13 @@ def clean_data(df):
     return df
 clean_df = clean_data(df)
 
-start_time = '9:44:00'
-end_time = '11:00:00'
-start_date = '2021/01/21'
-end_date = '2021/01/21'
+#start_time = '9:44:00'
+#end_time = '10:00:00'
+#start_date = '2021/01/21'
+#end_date = '2021/01/21'
 
 # Parameters - cleaned data frame, start date, start time, end date, end time
-def graph_data(clean_df,start_date,start_time,end_date,end_time):
+def graph_data( start_date,start_time,end_date,end_time):
     # This is grabbing the rows from selected range of dates and time
     # Have to use sort_index() b/c if not, then it raises an error about future deprecation
     time_chosen_df = clean_df.sort_index().loc[start_date:end_date].between_time(start_time,end_time)
@@ -54,4 +54,4 @@ def graph_data(clean_df,start_date,start_time,end_date,end_time):
     plt.show()
     
 
-graph_data( clean_df,start_date,start_time,end_date,end_time)
+#graph_data(start_date,start_time,end_date,end_time)
