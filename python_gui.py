@@ -34,17 +34,19 @@ label_file_explorer = Label(root, text = "Select File",width = 70, height = 4,fg
 label_file_explorer.pack()
 label_file_explorer.configure(text = "File Opened:\n " + path_name)
     
-   
+
+# Creating new dataframe 
 def createDF(filename):
     df = pd.read_csv(filename,sep=r'\s*,\s*', engine='python',skiprows = 6)
     return df
 
+# cleaning the dataframe using clean_data()
 def newCleanDF(df):
     df = clean_data(df)
     return df
 
-x = createDF(path_name)
-clean_df = newCleanDF(x)
+df = createDF(path_name)
+clean_df = newCleanDF(df)
 
 
 root.geometry("500x500")
