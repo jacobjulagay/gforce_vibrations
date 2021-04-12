@@ -4,7 +4,9 @@ from sys import exit
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-from cleaning_data import clean_data, graph_data
+from cleaning_data import clean_data,graph_data
+import os
+from pathlib import Path
 
 
 
@@ -14,20 +16,35 @@ root = Tk()
 # Opening file explorer
 # Make sure the initial dir will be set to C: drive.
 
+# To do: adjust file for cleaning_data b/c it's only on 1_22_21
+# To do: Issue w/ df only reading 1-22-21 from cleaning_data. 
+# Might just put all the classes in one file to reduce issues.  
 
-def viewFiles():
-    filename = filedialog.askopenfilename(initialdir= "C:/Users/jacob/Documents/krowpu", 
+
+    
+filename = filedialog.askopenfilename(initialdir= "C:/Users/jacob/Documents/krowpu", 
                                         title="Select a Excel File",
-                                        filetypes = (("csv files","*.csv*"),("all files",
-                                                        "*.*"), ))
-    #Change label contents 
-    label_file_explorer.configure(text = "File Opened:\n " + filename)
-    #Reading file
+                                        filetypes = (("csv files","*.csv*"), ))
+    
+filepath = filename
+path = Path(filepath)
+path_name = path.name
+#Change label contents 
+label_file_explorer = Label(root, text = "Select File",width = 70, height = 4,fg = "Red")
+label_file_explorer.pack()
+label_file_explorer.configure(text = "File Opened:\n " + path_name)
+    
+   
+def createDF(filename):
     df = pd.read_csv(filename,sep=r'\s*,\s*', engine='python',skiprows = 6)
-    clean_df= clean_data(df)
-    clean_df = clean_df.reset_index()
-    print(clean_df)
+    return df
 
+def newCleanDF(df):
+    df = clean_data(df)
+    return df
+
+x = createDF(path_name)
+clean_df = newCleanDF(x)
 
 
 root.geometry("500x500")
@@ -35,16 +52,11 @@ root.geometry("500x500")
 root.title('File Explorer')
 
 # Create a File Explorer label
-label_file_explorer = Label(root, text = "Select File",width = 70, height = 4,fg = "Red")
-label_file_explorer.pack()
+
 
 # Browse files button
-button_explore = Button(root,text = "Browse Files",command = viewFiles)
-button_explore.pack()
-
-
-
-
+#button_explore = Button(root,text = "Browse Files",command = viewFiles)
+#button_explore.pack()
 
 # Input Box - Examples
 #e = Entry(root, width = 50)
@@ -56,56 +68,57 @@ button_explore.pack()
 start_date_label = Label(root, text="Start Date: ")
 start_date_label.pack()
 start_date_entry = Entry(root, bd =5)
+start_date_entry.insert(0, "ex. 2021/01/21")
 start_date_entry.pack()
 start_date_entry.get()
-#start_date = start_date_entry.get()
+start_date = start_date_entry.get()
+
 
 # Start Time
 start_time_label = Label(root, text="Start time: ")
 start_time_label.pack()
 start_time_entry = Entry(root, bd =5)
+start_time_entry.insert(0, "ex. 09:00:00")
 start_time_entry.pack()
 start_time_entry.get()
-#start_time = start_time_entry.get() 
+start_time = start_time_entry.get() 
 
 # End Date
 end_date_label = Label(root, text="End Date: ")
 end_date_label.pack()
 end_date_entry = Entry(root, bd =5)
+end_date_entry.insert(0, "ex. 2021/01/21")
 end_date_entry.pack()
 end_date_entry.get()
-#end_date = end_date_entry.get() 
+end_date = end_date_entry.get() 
 
 # End time
 end_time_label = Label(root, text="End time: ")
 end_time_label.pack()
 end_time_entry = Entry(root, bd =5)
+end_time_entry.insert(0, "ex. 10:30:00")
 end_time_entry.pack()
 end_time_entry.get()
-#end_time = end_time_entry.get()
+end_time = end_time_entry.get()
 
 # Example click
-# 
 def myClick():
     start_date = start_date_entry.get()
     start_time = start_time_entry.get() 
     end_date = end_date_entry.get() 
     end_time = end_time_entry.get()
-    graph_data(start_date,start_time,end_date,end_time)
-    #myLabel = Label(root, text = start_date + start_time + end_date + end_time)
-    #myLabel.pack()
-
+    graph_data(clean_df,start_date,start_time,end_date,end_time)
 # Calculate Button
 calculate_bttn = Button(root, text="Calculate", command=myClick)
 calculate_bttn.pack()
 
 
-
+    
 
 
 # Exit button
-#button_exit = Button(root, text = "Exit", command = exit)
-#button_exit.pack()
+button_exit = Button(root, text = "Exit", command = exit)
+button_exit.pack()
 
 root.mainloop()
 exit()
