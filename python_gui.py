@@ -33,10 +33,8 @@ label_file_explorer.configure(text = "File Opened:\n " + filename)
 #view_bttn.grid(row=0, column = 1, sticky = E, padx =3,pady = 40)
 
 # Getting the file name from the directory    
-filepath = filename
-path = Path(filepath)
-path_name = path.name
-
+#path_name = os.path.basename(filename)
+path_name = filename
   
 
 # Creating new dataframe 
@@ -60,6 +58,7 @@ def clean_df():
     clean_df = clean_data(createDF(path_name))
     return clean_df
 
+
 # creating a df w/ chosen filename
 #df = createDF(viewFiles()) 
 
@@ -68,9 +67,9 @@ def clean_df():
 
 # Graphing function
 def graph_data(clean_df,start_date,start_time,end_date,end_time):
-    clean_df = clean_df()
     # This is grabbing the rows from selected range of dates and time
     # Have to use sort_index() b/c if not, then it raises an error about future deprecation
+    clean_df = clean_df()
     time_chosen_df = clean_df.sort_index().loc[start_date:end_date].between_time(start_time,end_time)
 
     # Graph attributes
@@ -133,13 +132,14 @@ end_time_entry.grid(row=4, column = 1, sticky = W, pady = 5)
 end_time_entry.get()
 end_time = end_time_entry.get()
 
+# Have to change something here 
 # Example click
-def myClick():
+def myClick(): 
     start_date = start_date_entry.get()
     start_time = start_time_entry.get() 
     end_date = end_date_entry.get() 
     end_time = end_time_entry.get()
-    graph_data(clean_df, start_date,start_time,end_date,end_time)
+    graph_data(clean_df,start_date,start_time,end_date,end_time)
 
 # Calculate Button
 calculate_bttn = Button(root, text="Graph", command=myClick, width = 10, font='Roboto 15 bold' )
