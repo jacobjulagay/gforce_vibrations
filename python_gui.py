@@ -12,25 +12,25 @@ from time import sleep
 # Opening file explorer
 # Make sure the initial dir will be set to C: drive.
 
-         
+#pandas','numpy','os','tkinter','sys','pathlib','matplotlib.pyplot' 
 
-filename = filedialog.askopenfilename(initialdir= "C:/Users/jacob/Documents/krowpu", 
+#def viewFiles():
+filename = filedialog.askopenfilename(initialdir= "C:\\Users\\jacob\\Documents\\GitHub\\gforce_vibrations", 
                                             title="Select a Excel File",
                                             filetypes = (("csv files","*.csv*"),))
-
-
+  
 #Creating the root root
 root = Tk()
+
 # Title
 root.title('File Explorer')
 
 label_file_explorer = Label(root, text = "Select File", height = 4,fg = "blue", font='Roboto 15 bold')
 label_file_explorer.grid(row = 0, column =1, sticky = W, pady = 5)  
-
+label_file_explorer.configure(text = "File Opened:\n " + filename)
+    
 #view_bttn = Button(root, text="Search for file: ", command=viewFiles, width = 10, font='Roboto 15 bold' )
 #view_bttn.grid(row=0, column = 1, sticky = E, padx =3,pady = 40)
-label_file_explorer.configure(text = "File Opened:\n " + filename)
-
 
 # Getting the file name from the directory    
 filepath = filename
@@ -40,8 +40,8 @@ path_name = path.name
   
 
 # Creating new dataframe 
-def createDF(filename):
-    df = pd.read_csv(filename,sep=r'\s*,\s*', engine='python',skiprows = 6)
+def createDF(path_name):
+    df = pd.read_csv(path_name,sep=r'\s*,\s*', engine='python',skiprows = 6)
     return df
 
 # Cleaning function the data - removing NA's, creating df, dropping column
@@ -56,14 +56,19 @@ def clean_data(df):
     df = df.set_index(['Date-Time'])
     return df
 
+def clean_df():
+    clean_df = clean_data(createDF(path_name))
+    return clean_df
+
 # creating a df w/ chosen filename
-df = createDF(path_name) 
+#df = createDF(viewFiles()) 
 
 # cleaning dataframe
-clean_df = clean_data(df) 
+#clean_df = clean_data(df) 
 
 # Graphing function
 def graph_data(clean_df,start_date,start_time,end_date,end_time):
+    clean_df = clean_df()
     # This is grabbing the rows from selected range of dates and time
     # Have to use sort_index() b/c if not, then it raises an error about future deprecation
     time_chosen_df = clean_df.sort_index().loc[start_date:end_date].between_time(start_time,end_time)
@@ -85,7 +90,7 @@ def graph_data(clean_df,start_date,start_time,end_date,end_time):
     plt.plot(zvib,'go--',label='Zvib')
 
     plt.legend()
-    plt.show()
+    return plt.show()
 
 
 # Start Date
@@ -134,7 +139,7 @@ def myClick():
     start_time = start_time_entry.get() 
     end_date = end_date_entry.get() 
     end_time = end_time_entry.get()
-    graph_data(clean_df,start_date,start_time,end_date,end_time)
+    graph_data(clean_df, start_date,start_time,end_date,end_time)
 
 # Calculate Button
 calculate_bttn = Button(root, text="Graph", command=myClick, width = 10, font='Roboto 15 bold' )
