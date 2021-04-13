@@ -24,9 +24,9 @@ root = Tk()
 
 
     
-filename = filedialog.askopenfilename(initialdir= "C:/Users/jacob/Documents/krowpu", 
+filename = filedialog.askopenfilename(
                                         title="Select a Excel File",
-                                        filetypes = (("csv files","*.csv*"), ))
+                                        filetypes = (("csv files","*.csv"), ("all files","*.*"),))
 
 
 # Getting the file name from the directory    
