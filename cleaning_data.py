@@ -4,8 +4,8 @@ import numpy as np
 
 # Read in csv file. 
 # using sep because of whitespace in column names, Skipping first 6 rows
-df = pd.read_csv("2021_01_22_202641_PowerMaster_ShockVibe.csv",sep=r'\s*,\s*', engine='python',skiprows = 6)
-
+#df = pd.read_csv("2021_01_22_202641_PowerMaster_ShockVibe.csv",sep=r'\s*,\s*', engine='python',skiprows = 6)
+df = pd.DataFrame()
 def clean_data(df):
     #Removing last column because it has NA values
     df.drop(df.columns[[-1,]], axis=1, inplace=True)
