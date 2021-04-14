@@ -1,17 +1,13 @@
 # -*- mode: python ; coding: utf-8 -*-
 
-
-
 block_cipher = None
-#added_files = [
-#   ('C:\\Users\\jacob\\Documents\\GitHub\\gforce_vibrations\\2021_01_22_202641_PowerMaster_ShockVibe.csv','.'),
-#]
+
 
 a = Analysis(['python_gui.py'],
              pathex=['C:\\Users\\jacob\\Documents\\GitHub\\gforce_vibrations'],
              binaries=[],
              datas=[],
-             hiddenimports=['pandas','numpy','os','tkinter','sys','pathlib','matplotlib.pyplot'],
+             hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],
@@ -23,15 +19,19 @@ pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 exe = EXE(pyz,
           a.scripts,
-          a.binaries,
-          a.zipfiles,
-          a.datas,
           [],
+          exclude_binaries=True,
           name='python_gui',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          upx_exclude=[],
-          runtime_tmpdir=None,
           console=True )
+coll = COLLECT(exe,
+               a.binaries,
+               a.zipfiles,
+               a.datas,
+               strip=False,
+               upx=True,
+               upx_exclude=[],
+               name='python_gui')

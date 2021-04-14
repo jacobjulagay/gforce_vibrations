@@ -1,0 +1,12 @@
+{
+  "base_url": "/",
+  "hostname": "localhost",
+  "password": false,
+  "pid": 1464,
+  "port": 8888,
+  "root_dir": "C:\\Users\\jacob\\documents\\krowpu",
+  "secure": false,
+  "token": "332fffbf5b451442c1c2c2c0253ab433eaab859abbb5db12",
+  "url": "http://localhost:8888/",
+  "version": "1.2.2"
+}

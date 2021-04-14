@@ -1,0 +1,12 @@
+{
+  "base_url": "/",
+  "hostname": "localhost",
+  "password": false,
+  "pid": 6956,
+  "port": 8888,
+  "root_dir": "C:\\Users\\jacob\\documents\\github\\gforce_vibrations",
+  "secure": false,
+  "token": "10f1a4f13b31b9fe00a37b4e6e496e9fc59aecf1b21102fb",
+  "url": "http://localhost:8888/",
+  "version": "1.2.2"
+}

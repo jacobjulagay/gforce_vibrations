@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import filedialog
+from tkinter import messagebox
 from sys import exit
 import sys
 import pandas as pd
@@ -12,7 +13,7 @@ from time import sleep
 # Opening file explorer
 # Make sure the initial dir will be set to C: drive.
 
-#pandas','numpy','os','tkinter','sys','pathlib','matplotlib.pyplot' 
+#pandas','numpy','os','tkinter','sys','pathlib','matplotlib.pyplot' , 'filedialog', ''
 
 #def viewFiles():
 filename = filedialog.askopenfilename(initialdir= "C:\\Users\\jacob\\Documents\\GitHub\\gforce_vibrations", 
@@ -28,15 +29,9 @@ root.title('File Explorer')
 label_file_explorer = Label(root, text = "Select File", height = 4,fg = "blue", font='Roboto 15 bold')
 label_file_explorer.grid(row = 0, column =1, sticky = W, pady = 5)  
 label_file_explorer.configure(text = "File Opened:\n " + filename)
-    
-#view_bttn = Button(root, text="Search for file: ", command=viewFiles, width = 10, font='Roboto 15 bold' )
-#view_bttn.grid(row=0, column = 1, sticky = E, padx =3,pady = 40)
 
-# Getting the file name from the directory    
-#path_name = os.path.basename(filename)
 path_name = filename
   
-
 # Creating new dataframe 
 def createDF(path_name):
     df = pd.read_csv(path_name,sep=r'\s*,\s*', engine='python',skiprows = 6)
@@ -57,13 +52,6 @@ def clean_data(df):
 def clean_df():
     clean_df = clean_data(createDF(path_name))
     return clean_df
-
-
-# creating a df w/ chosen filename
-#df = createDF(viewFiles()) 
-
-# cleaning dataframe
-#clean_df = clean_data(df) 
 
 # Graphing function
 def graph_data(clean_df,start_date,start_time,end_date,end_time):
@@ -91,6 +79,21 @@ def graph_data(clean_df,start_date,start_time,end_date,end_time):
     plt.legend()
     return plt.show()
 
+# Use try except here
+# Example click
+def myClick(): 
+    try:
+        start_date = start_date_entry.get()
+        start_time = start_time_entry.get() 
+        end_date = end_date_entry.get() 
+        end_time = end_time_entry.get()
+        graph_data(clean_df,start_date,start_time,end_date,end_time)
+    except: 
+        messagebox.showerror("Error","Please follow the format.")
+# Restart the program
+def restart_program():
+    python = sys.executable
+    os.execl(python, python, * sys.argv)
 
 # Start Date
 start_date_label = Label(root, text="Start Date: ", font='Roboto 15 bold')
@@ -132,23 +135,10 @@ end_time_entry.grid(row=4, column = 1, sticky = W, pady = 5)
 end_time_entry.get()
 end_time = end_time_entry.get()
 
-# Have to change something here 
-# Example click
-def myClick(): 
-    start_date = start_date_entry.get()
-    start_time = start_time_entry.get() 
-    end_date = end_date_entry.get() 
-    end_time = end_time_entry.get()
-    graph_data(clean_df,start_date,start_time,end_date,end_time)
 
 # Calculate Button
 calculate_bttn = Button(root, text="Graph", command=myClick, width = 10, font='Roboto 15 bold' )
 calculate_bttn.grid(row=5, column = 2, sticky = E, padx =3,pady = 40)
-
-# Restart the program
-def restart_program():
-    python = sys.executable
-    os.execl(python, python, * sys.argv)
 
 # Restart Button
 restart_bttn = Button(root, text = "Restart", command = restart_program, width = 10, font='Roboto 15 bold')
