@@ -16,7 +16,7 @@ from time import sleep
 #pandas','numpy','os','tkinter','sys','pathlib','matplotlib.pyplot' , 'filedialog', ''
 
 #def viewFiles():
-filename = filedialog.askopenfilename(initialdir= "C:\\Users\\jacob\\Documents\\GitHub\\gforce_vibrations", 
+filename = filedialog.askopenfilename(initialdir= "/", 
                                             title="Select a Excel File",
                                             filetypes = (("csv files","*.csv*"),))
   
@@ -89,7 +89,7 @@ def myClick():
         end_time = end_time_entry.get()
         graph_data(clean_df,start_date,start_time,end_date,end_time)
     except: 
-        messagebox.showerror("Error","Please follow the format.")
+        messagebox.showerror("Error","Please enter the correct Date and Time format.")
 # Restart the program
 def restart_program():
     python = sys.executable
