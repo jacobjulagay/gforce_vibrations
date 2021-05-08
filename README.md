@@ -11,7 +11,7 @@ Steps for the program:
 
 ### Python GUI
 ![python_gui](python_gui.png)
-![python_gui_graph.png](python_gui_graph.png)
+![python_gui_graph.png](python_gui_large.png)
 
 ## Technologies
 * Python
