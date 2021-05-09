@@ -1,5 +1,5 @@
 ## About the Project
-The goal of this project is to generate a time-series plot from formatted data using a GUI. It contains vibrations taken from a electronic logging too working in the oil and gas industry. 
+The goal of this project is to generate a time-series plot from formatted data using a GUI. It contains vibrations taken from a electronic logging tool working in the oil and gas industry. 
 
 Steps for the program:
 1. User downloads the Excel spreadsheet from the GUI and saves it to their computer.
